@@ -1,4 +1,3 @@
-
 ## It takes a matrix as argument and returns list of functions
 
 makeCacheMatrix <- function(x = matrix()) {
@@ -18,26 +17,27 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## This function uses the outcome from makeCacheMatrix to decide whether to run
+# the computation or just take it from memory
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  ## Return a matrix that is the inverse of 'x'
   m <- x$getsolve()
-  if(!is.null(m)) {
+  if(!is.null(m)) { # Check if value is already in memory
     message("getting cached data")
-    return(m)
+    return(m)      # Print the value if in memory
   }
-  data <- x$get()
-  m <- solve(data, ...)
+  data <- x$get()       # Get the input data
+  m <- solve(data, ...) # Compute the inverse matrix
   x$setsolve(m)
-  m
+  m                     # Print the outcome
 }
 
 # Usage ----
-mat <- matrix(rnorm(4),2,2)
-a <- makeCacheMatrix (mat)
+  mat <- matrix(rnorm(4),2,2)
+  a <- makeCacheMatrix (mat)
 
-cacheSolve (a)
-cacheSolve (a)
+  cacheSolve (a)
+  cacheSolve (a)
 
 
